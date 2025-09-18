@@ -83,14 +83,31 @@ int main(){
                          std::cout<<"new selected piece: " << selectedP.name <<'\n';
                     }else{
                         std::cout<<"else movement entered";
-
+                         // rook check
                         if((selectedP.name == "rookW" && whiteRole == 1 )||(selectedP.name == "rookB" && blackRole == 1)){
+                               std::cout<<'\n'<<"rook";
                            rookMov(selectedP,mousePos);
-                           roleReverse();
+                          
+                         }//pawn check
+                         if((selectedP.name == "pawnW" && whiteRole == 1) || (selectedP.name == "pawnB" && blackRole == 1)){
+                             std::cout<<'\n'<<"pawn";
+                            pawnMov(selectedP,mousePos);
+                           
+                         }//knight check
+                         if((selectedP.name == "knightW" && whiteRole == 1 ) || (selectedP.name == "knightB" && blackRole == 1) ){
+                             std::cout<<'\n'<<"knightis_trying to move :";
+                             knightMov(selectedP,mousePos);
                          }
+                         if((selectedP.name == "kingW" && whiteRole == 1 ) || (selectedP.name == "kingB" && blackRole == 1)){
+                             std::cout<<"king is trying to mov"<<'\n';
+                             kingMov(selectedP,mousePos);
+
+                        }
                          selectedP.name = "";
-                         std::cout<<"black role: "<<blackRole;
-                         std::cout<<"white role:" << whiteRole;
+                         std::cout<<"black role: "<<blackRole<<'\n';
+
+
+                         std::cout<<"white role:" << whiteRole<<'\n';
                          
                          }
 
@@ -106,23 +123,23 @@ int main(){
         }}
            
            // the core of our program //
-window.clear();
+ window.clear();
 
            // we draw the board squares //
-for (sf::RectangleShape sq : board ){
+ for (sf::RectangleShape sq : board ){
     window.draw(sq);}
            
 
             
             
-draw_pieces(window);
+ draw_pieces(window);
             
            
           
 
  window.display();
  // end of window.isOpen() // 
-  }
+}
 
 
   return EXIT_SUCCESS;

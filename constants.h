@@ -8,7 +8,7 @@
 #define BOARD_WIDTH 800
 #define BOARD_HEIGHT 800
 #define BOARD_SIZE 100
-
+#define NSQUARES 7
 // this stores the name of the clicked piece;
 struct pieceTrack{
   int x;
