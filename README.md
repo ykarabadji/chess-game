@@ -9,13 +9,14 @@
  - king moves
  - knight moves 
  - roles (white then black )
+ - bishop moves 
+ - queen moves
  
  # what isnt implemented 
  
 
- - bishop moves 
- - queen moves
- - pieces cant move to spwcifique square while there is one piece on its way 
+
+ - pieces cant move to specific square while there is one piece on its way 
  - checkmates -> is king under a check or not || is king ender danger or not (if a pieces will be moved the king will be checked so that piece shouldnt be allowed to move)4
  - timer 
  - server 
