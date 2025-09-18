@@ -11,6 +11,15 @@
   /*bool validMoves(){
 
   }*/
+ bool squareIsEmpty(sf::Vector2i mousePos){
+     int boardx = mousePos.x/100;
+     int boardy = mousePos.y/100;
+     if(!board2D[boardy][boardx].piece.Ttype.empty()){
+        return false;
+     }
+     return true;
+    }
+
     //roles reverse 
  void roleReverse(){
         if(whiteRole == 1){
@@ -86,15 +95,19 @@
      if(boardx == selectedP.x)
      {
          // here it can move 2 squares
-        if( abs(boardy - selectedP.y) <=3 && (abs(selectedP.y - NSQUARES) == 1 || abs(selectedP.y - NSQUARES) == 6)){
+        if( abs(boardy - selectedP.y) <=3 && (abs(selectedP.y - NSQUARES) == 1 || abs(selectedP.y - NSQUARES) == 6) && squareIsEmpty(mousePos)){
              transferPiecePos(selectedP,boardx,boardy);
 
-        }else if(abs(boardy - selectedP.y) == 1){
+        }else if(abs(boardy - selectedP.y) == 1 && squareIsEmpty(mousePos)){
              std::cout<< " we are here baordy - mousePos.y";
              transferPiecePos(selectedP,boardx,boardy);
 
         }
-     }
+     }else if(abs(boardy - selectedP.y) == 1 && abs(boardx - selectedP.x) == 1 &&  !squareIsEmpty(mousePos)){
+            transferPiecePos(selectedP,boardx,boardy);
+     }else{
+         std::cout<< "pawn returned without moving "<<'\n';
+    }
  }
 
  void knightMov(pieceTrack& selectedP,sf::Vector2i mousePos)
