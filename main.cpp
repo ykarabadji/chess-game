@@ -5,14 +5,15 @@
 #include "constants.h"
 #include "spirits.h"
 #include "logic.h"
-static std::vector<sf::RectangleShape> board;
-static int board_control_color = 0;//it controls and manages board color 
+#include "effects.h"
 
 void board_init(sf::RectangleShape square){
     for(float x=0;x<BOARD_WIDTH;x+=100){
         for(float  y=0;y<BOARD_HEIGHT;y+=100){
                 square.setSize(sf::Vector2f({BOARD_SIZE,BOARD_SIZE}));
                 square.setPosition({x,y});
+
+
             if(board_control_color == 0 ){
                 square.setFillColor(sf::Color::White);
                 board_control_color = 1;
@@ -74,14 +75,17 @@ int main(){
                          selectedP.name = clickedpiece;
                          selectedP.x = x;
                          selectedP.y = y; 
+
                          std::cout<<" new selected  piece: " << selectedP.name<<'\n';
 
                     }else if(find_element_in_string(blackpieces,selectedP.name)!=blackpieces.end() && find_element_in_string(blackpieces,clickedpiece)!=blackpieces.end()){
                          selectedP.name = clickedpiece;
                          selectedP.x = x;
                          selectedP.y = y; 
+
                          std::cout<<"new selected piece: " << selectedP.name <<'\n';
                     }else{
+
                         std::cout<<"else movement entered";
                          // rook check
                         if((selectedP.name == "rookW" && whiteRole == 1 )||(selectedP.name == "rookB" && blackRole == 1)){
@@ -103,7 +107,16 @@ int main(){
                              kingMov(selectedP,mousePos);
 
                         }
+                        if((selectedP.name == "bishopW" && whiteRole == 1 ) || (selectedP.name == "bishopB" && blackRole == 1)){
+                             std::cout<<"bishop is trying to mov"<<'\n';
+                             bishopMov(selectedP,mousePos);
+                        }
+                        if((selectedP.name == "queenW" && whiteRole == 1 ) || (selectedP.name == "queenB" && blackRole == 1)){
+                             std::cout<< "queen is trying to mov"<<'\n';
+                             queenMov(selectedP,mousePos);
+                        }
                          selectedP.name = "";
+                         
                          std::cout<<"black role: "<<blackRole<<'\n';
 
 
@@ -112,7 +125,7 @@ int main(){
                          }
 
 
-                   
+
 
              
                 
@@ -124,14 +137,15 @@ int main(){
            
            // the core of our program //
  window.clear();
+ selectEffect();
 
            // we draw the board squares //
  for (sf::RectangleShape sq : board ){
     window.draw(sq);}
            
 
-            
-            
+ // every frame we track the king position //
+ getKingsPos();
  draw_pieces(window);
             
            
